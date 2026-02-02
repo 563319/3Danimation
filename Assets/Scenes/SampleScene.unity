@@ -888,6 +888,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SK_Character_Goblin_Male
       objectReference: {fileID: 0}
+    - target: {fileID: 3240777440155657481, guid: b8327d873acebc041957a135b5f6656a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: b8327d873acebc041957a135b5f6656a, type: 3}
       propertyPath: m_Controller
       value: 
@@ -936,7 +940,7 @@ MonoBehaviour:
   turnSmoothTime: 0.1
   cam: {fileID: 330585546}
   speed: 10
-  jumpSpeed: 10
+  jumpSpeed: {x: 0, y: 15, z: 0}
 --- !u!4 &926832496 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b8327d873acebc041957a135b5f6656a, type: 3}
@@ -1015,6 +1019,7 @@ GameObject:
   - component: {fileID: 1171814592}
   - component: {fileID: 1171814591}
   - component: {fileID: 1171814590}
+  - component: {fileID: 1171814595}
   m_Layer: 0
   m_Name: FreeLook Camera
   m_TagString: Untagged
@@ -1247,6 +1252,45 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &1171814595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171814588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe43d662878a7c43bcd44d43c9e2094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineDeoccluder
+  CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 0
+  IgnoreTag: 
+  TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  MinimumDistanceFromTarget: 0.3
+  AvoidObstacles:
+    Enabled: 1
+    DistanceLimit: 0
+    MinimumOcclusionTime: 0
+    CameraRadius: 0.4
+    UseFollowTarget:
+      Enabled: 0
+      YOffset: 0
+    Strategy: 0
+    MaximumEffort: 4
+    SmoothingTime: 0
+    Damping: 0.4
+    DampingWhenOccluded: 0.2
+  ShotQualityEvaluation:
+    Enabled: 0
+    OptimalDistance: 10
+    NearLimit: 5
+    FarLimit: 30
+    MaxQualityBoost: 0.2
 --- !u!1 &1691918616
 GameObject:
   m_ObjectHideFlags: 0
