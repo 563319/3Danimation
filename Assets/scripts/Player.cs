@@ -12,11 +12,15 @@ public class Player : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
     public Transform cam;
-    public float speed = 10;
+    public float speed = 5;
     public float jumpSpeed = 10f;
     //bool isGrounded = false;
-    public float gravity = 7.8f;
+    public float gravity = -9f;
     bool isJumping = false;
+    Vector3 playerVelocity;
+    bool isGrounded = false;
+    
+    public float rayCastOffset = 1f;
 
 
 
@@ -27,15 +31,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         PlayerUpdate();
+        DoGravity();
+        RaycastIsGrounded();
+        print(isGrounded);
         //controller.velocity.y += gravity;
     }
-    private void FixedUpdate()
-    {
-        
-    }
-
-
-
+   
     void PlayerUpdate()
     {
 
@@ -44,9 +45,6 @@ public class Player : MonoBehaviour
         Vector3 direction = new Vector3(h, 0, v).normalized;
         float yvel = controller.velocity.y;
         
-
-
-
         if (h > 0 || h < 0 || v > 0 || v < 0)
         {
             anim.SetBool("isRunning", true);
@@ -71,17 +69,25 @@ public class Player : MonoBehaviour
             anim.SetBool("isJumping", false);
         }
 
-        if (Input.GetKey("j"))
+
+        if (Input.GetKey(KeyCode.Space) && isGrounded == true)
         {
             isJumping = true;
-            //controller.velocity.y = jumpSpeed;
+            playerVelocity.y = jumpSpeed - gravity * Time.deltaTime;
         }
         if (isJumping == true && controller.velocity.y < 0)
         {
             isJumping = false;
         }
-
-
+        if (isGrounded == true)
+        {
+            playerVelocity.y = 0;
+        }
+        if (anim.GetBool("isIdle") == true)
+        {
+            playerVelocity.x = 0;
+            playerVelocity.z = 0;
+        }
 
         if (direction.magnitude >= 0.1f)
         {
@@ -91,13 +97,58 @@ public class Player : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
+            Vector3 vel = moveDir.normalized * speed;
+
+            playerVelocity.x = vel.x;
+            playerVelocity.z = vel.z;
+
             //rb.linearVelocity = new Vector3( moveDir.x*speed, yvel, moveDir.z*speed);
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
 
 
-        c
+        
     }
+
+    void DoGravity()
+    {
+        playerVelocity.y += gravity * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
+
+    }
+
+    private void RaycastIsGrounded()
+    {
+        Vector3 offset = new Vector3(0, rayCastOffset, 0);
+        var ray = new Ray(transform.position + offset, Vector3.down);
+
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 1) == true)
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+
+        }
+        Debug.DrawRay(transform.position + offset, Vector3.down, Color.red);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /*
     private void Raycast()
@@ -111,11 +162,11 @@ public class Player : MonoBehaviour
             //isRayColliding = true;
             if (hitInfo.collider.gameObject.tag == "slope" && rb.linearVelocity.y < 0)
             {
-                isRaySlope = true;
+                //isRaySlope = true;
             }
             else
             {
-                isRaySlope = false;
+                //isRaySlope = false;
             }
 
             if (hitInfo.collider.gameObject.layer == 6)
@@ -136,4 +187,7 @@ public class Player : MonoBehaviour
         Debug.DrawRay(transform.position + offset, Vector3.down, Color.red);
     }
     */
+
+
+
 }
