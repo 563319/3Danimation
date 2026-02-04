@@ -16,9 +16,10 @@ public class Player : MonoBehaviour
     public float jumpSpeed = 10f;
     //bool isGrounded = false;
     public float gravity = -9f;
-    bool isJumping = false;
+    //bool isJumping = false;
     Vector3 playerVelocity;
     bool isGrounded = false;
+    
     
     public float rayCastOffset = 1f;
 
@@ -43,8 +44,7 @@ public class Player : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(h, 0, v).normalized;
-        float yvel = controller.velocity.y;
-        
+        float yvel = playerVelocity.y;
         if (h > 0 || h < 0 || v > 0 || v < 0)
         {
             anim.SetBool("isRunning", true);
@@ -55,34 +55,30 @@ public class Player : MonoBehaviour
             anim.SetBool("isIdle", true);
             anim.SetBool("isRunning", false);
         }
-        if (yvel > 0.1 && isJumping == true)
-        {
+        
+        
 
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
+        {
             anim.SetBool("isJumping", true);
             anim.SetBool("isRunning", false);
             anim.SetBool("isIdle", false);
-
-
         }
-        else
-        {
-            anim.SetBool("isJumping", false);
-        }
+        
 
-
-        if (Input.GetKey(KeyCode.Space) && isGrounded == true)
+        
+        if (playerVelocity.y > 0 )
         {
-            isJumping = true;
-            playerVelocity.y = jumpSpeed - gravity * Time.deltaTime;
+            anim.SetBool("isRunning", false);
         }
-        if (isJumping == true && controller.velocity.y < 0)
+        
+        if (isGrounded == true && playerVelocity.y <0)
         {
-            isJumping = false;
-        }
-        if (isGrounded == true)
-        {
+            print(playerVelocity.y);
             playerVelocity.y = 0;
+            print(playerVelocity.y);
         }
+        
         if (anim.GetBool("isIdle") == true)
         {
             playerVelocity.x = 0;
@@ -131,6 +127,19 @@ public class Player : MonoBehaviour
 
         }
         Debug.DrawRay(transform.position + offset, Vector3.down, Color.red);
+    }
+    void StartJumpUp()
+    {
+        playerVelocity.y = jumpSpeed - gravity * Time.deltaTime;
+    }
+    void RemoveXZvel()
+    {
+        playerVelocity.x = 0;
+        playerVelocity.z = 0;
+    }
+    void StopJump()
+    {
+        anim.SetBool("isJumping", false);
     }
 
 
