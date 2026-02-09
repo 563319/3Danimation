@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 
 
@@ -7,7 +9,7 @@ public class Player : MonoBehaviour
 {
     public CharacterController controller;
     public Animator anim;
-   
+    public Transform target;
 
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
@@ -19,90 +21,133 @@ public class Player : MonoBehaviour
     //bool isJumping = false;
     Vector3 playerVelocity;
     bool isGrounded = false;
-    
+    bool enemyInRadius = false;
+    public int playerHealth;
+    public enemy Enemy;
+    public bool isDead = false;
+    public int playerDamage = 50;
+    public int score = 0;
     
     public float rayCastOffset = 1f;
+    Vector3 raycastForwardDir = new Vector3(0, 0, 0);
+    Vector3 raycastForwardOffset = new Vector3(0,1,0);
+
 
 
 
     void Start()
     {
-
+        playerHealth = 100;
     }
     void Update()
     {
         PlayerUpdate();
         DoGravity();
         RaycastIsGrounded();
-        print(isGrounded);
+        //RaycastForward();
         //controller.velocity.y += gravity;
     }
    
     void PlayerUpdate()
     {
+        print(playerHealth);
 
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3(h, 0, v).normalized;
-        float yvel = playerVelocity.y;
-        if (h > 0 || h < 0 || v > 0 || v < 0)
+        if (isDead == false)
         {
-            anim.SetBool("isRunning", true);
-            anim.SetBool("isIdle", false);
+            
+            float h = Input.GetAxisRaw("Horizontal");
+            float v = Input.GetAxisRaw("Vertical");
+            Vector3 direction = new Vector3(h, 0, v).normalized;
+            float yvel = playerVelocity.y;
+            if (h > 0 || h < 0 || v > 0 || v < 0)
+            {
+                anim.SetBool("isRunning", true);
+                anim.SetBool("isIdle", false);
+            }
+            else
+            {
+                anim.SetBool("isIdle", true);
+                anim.SetBool("isRunning", false);
+            }
+
+
+
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
+            {
+                anim.SetBool("isJumping", true);
+                anim.SetBool("isRunning", false);
+                anim.SetBool("isIdle", false);
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown("f") && anim.GetBool("isJumping") == false)
+            {
+                punch();
+            }
+
+
+
+            if (playerVelocity.y > 0)
+            {
+                anim.SetBool("isRunning", false);
+            }
+
+            if (isGrounded == true && playerVelocity.y < 0)
+            {
+
+                playerVelocity.y = 0;
+
+            }
+
+            if (anim.GetBool("isIdle") == true)
+            {
+                playerVelocity.x = 0;
+                playerVelocity.z = 0;
+            }
+
+            if (direction.magnitude >= 0.1f)
+            {
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+                Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                //raycastForwardDir =
+
+                Vector3 vel = moveDir.normalized * speed;
+
+                playerVelocity.x = vel.x;
+                playerVelocity.z = vel.z;
+
+                //rb.linearVelocity = new Vector3( moveDir.x*speed, yvel, moveDir.z*speed);
+            }
+            if (playerHealth <= 0)
+            {
+                isDead = true;
+            }
+            if (anim.GetBool("isPunching") == true)
+            {
+                if (target != null)
+                {
+                    gameObject.transform.LookAt(target);
+                }
+                else
+                {
+                    print("looking at null target");
+                }
+                return;
+            }
+
+
         }
         else
         {
-            anim.SetBool("isIdle", true);
-            anim.SetBool("isRunning", false);
-        }
-        
-        
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
-        {
-            anim.SetBool("isJumping", true);
+            anim.SetBool("isDead", true);
+            anim.SetBool("isJumping", false);
             anim.SetBool("isRunning", false);
             anim.SetBool("isIdle", false);
-        }
-        
-
-        
-        if (playerVelocity.y > 0 )
-        {
-            anim.SetBool("isRunning", false);
-        }
-        
-        if (isGrounded == true && playerVelocity.y <0)
-        {
-            print(playerVelocity.y);
-            playerVelocity.y = 0;
-            print(playerVelocity.y);
-        }
-        
-        if (anim.GetBool("isIdle") == true)
-        {
-            playerVelocity.x = 0;
-            playerVelocity.z = 0;
-        }
-
-        if (direction.magnitude >= 0.1f)
-        {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-
-            Vector3 vel = moveDir.normalized * speed;
-
-            playerVelocity.x = vel.x;
-            playerVelocity.z = vel.z;
-
-            //rb.linearVelocity = new Vector3( moveDir.x*speed, yvel, moveDir.z*speed);
+            anim.SetBool("isPunching", false);
         }
 
 
-        
     }
 
     void DoGravity()
@@ -114,6 +159,7 @@ public class Player : MonoBehaviour
 
     private void RaycastIsGrounded()
     {
+        
         Vector3 offset = new Vector3(0, rayCastOffset, 0);
         var ray = new Ray(transform.position + offset, Vector3.down);
 
@@ -128,6 +174,31 @@ public class Player : MonoBehaviour
         }
         Debug.DrawRay(transform.position + offset, Vector3.down, Color.red);
     }
+
+    /*
+    private bool RaycastForward()
+    {
+        bool HitEnemy = false;
+        Vector3 offset = raycastForwardDir + raycastForwardOffset;
+        var ray = new Ray(transform.position + offset, Vector3.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 1) == true)
+        {
+            if (hitInfo.collider.CompareTag("enemy"))
+            {
+                HitEnemy = true;
+            }
+            
+        }
+        else
+        {
+            HitEnemy = false;
+
+        }
+        Debug.DrawRay(transform.position + offset, Vector3.forward, Color.black);
+        return HitEnemy;
+    }
+    */
     void StartJumpUp()
     {
         playerVelocity.y = jumpSpeed - gravity * Time.deltaTime;
@@ -140,7 +211,66 @@ public class Player : MonoBehaviour
     void StopJump()
     {
         anim.SetBool("isJumping", false);
+        
     }
+    void EndPunch()
+    {
+        anim.SetBool("isPunching", false);
+    }
+
+    void punch()
+    {
+        if (enemyInRadius == true)
+        {
+            anim.SetBool("isPunching", true);
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isJumping", false);
+            
+        }
+        /*
+        if (RaycastForward() == true)
+        {
+            anim.SetBool("isPunching", true);
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isJumping", false);
+
+        }
+        */
+    }
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag("enemy"))
+        {
+            enemyInRadius = true;
+            target = col.gameObject.transform;
+        }
+        else
+        {
+            enemyInRadius = false;
+        }
+
+    }
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.CompareTag("enemy"))
+        {
+            
+            enemyInRadius = false;
+        }
+        
+
+    }
+    void DoDamagePlayer()
+    {
+        if (enemyInRadius == true)
+        {
+            Enemy.enemyHealth -= playerDamage;
+        }
+    }
+
+
 
 
 
