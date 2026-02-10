@@ -70,9 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad6b05ee66d43804d9ccb9bb73930282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemy
-  player: {fileID: 0}
   anim: {fileID: 1878462356156670831}
-  plr: {fileID: 0}
   enemyHealth: 100
   enemyDamage: 20
 --- !u!195 &8528514540157331830

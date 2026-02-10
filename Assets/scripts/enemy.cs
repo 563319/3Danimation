@@ -34,9 +34,10 @@ public class enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        print(enemyHealth);
         if (isDead == false)
         {
-            if (isAttacking == true)
+            if (isAttacking)
             {
                 anim.SetBool("isAttacking", true);
                 anim.SetBool("isIdle", false);
