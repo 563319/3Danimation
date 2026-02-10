@@ -1,4 +1,5 @@
 using Unity.Hierarchy;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MedSpawnerScript : MonoBehaviour
@@ -7,6 +8,7 @@ public class MedSpawnerScript : MonoBehaviour
     float spawnTimer = 10;
     bool canSpawn = true;
     Vector3  offset = new Vector3(0,1,0);
+    GameObject clone;
     public Player plr;
 
     
@@ -19,22 +21,22 @@ public class MedSpawnerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (clone == null)
+        {
+            canSpawn = true;
+        }
 
-        
-       
-            spawnTimer -= Time.deltaTime;
+
+        spawnTimer -= Time.deltaTime;
         if (spawnTimer <= 0 && canSpawn == true)
         {
             // Instantiate the bullet at the position and rotation of the player
-            GameObject clone;
+            
             print("spawner:" + gameObject.name);
             clone = Instantiate(healthPickup, transform.position + offset, transform.rotation);
             print("spawned medkit");
             canSpawn = false;
-            if (clone == null)
-            {
-                canSpawn = true;
-            }
+            
 
 
 
