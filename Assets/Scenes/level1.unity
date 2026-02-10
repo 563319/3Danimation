@@ -893,6 +893,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemySpawn
   enemy: {fileID: 7400805402858598181, guid: 2f6b3bd849ffbf64f85b371863b1b8e3, type: 3}
+  spawnTimer: 25
+  waveCounter: 1
 --- !u!65 &140842604
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9557,6 +9559,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemySpawn
   enemy: {fileID: 7400805402858598181, guid: 2f6b3bd849ffbf64f85b371863b1b8e3, type: 3}
+  spawnTimer: 25
+  waveCounter: 1
 --- !u!65 &1817631652
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10348,6 +10352,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemySpawn
   enemy: {fileID: 7400805402858598181, guid: 2f6b3bd849ffbf64f85b371863b1b8e3, type: 3}
+  spawnTimer: 25
+  waveCounter: 1
 --- !u!65 &1980941274
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11088,6 +11094,7 @@ MonoBehaviour:
   score: 0
   playerMaxHealth: 200
   rayCastOffset: 0.8
+  EnemySpawn: {fileID: 1980941273}
 --- !u!136 &2132081638
 CapsuleCollider:
   m_ObjectHideFlags: 0
