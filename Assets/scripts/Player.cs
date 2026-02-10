@@ -37,6 +37,8 @@ public class Player : MonoBehaviour
     Vector3 raycastForwardDir = new Vector3(0, 0, 0);
     Vector3 raycastForwardOffset = new Vector3(0,1,0);
 
+    public enemySpawn EnemySpawn;
+
 
 
 
@@ -69,6 +71,7 @@ public class Player : MonoBehaviour
             {
                 anim.SetBool("isRunning", true);
                 anim.SetBool("isIdle", false);
+                anim.SetBool("isPunching", false);
             }
             else
             {
@@ -296,8 +299,12 @@ public class Player : MonoBehaviour
         else
         {
             //debug text
-            string text = "HEALTH =" + playerHealth;
-            text += "\nSCORE =" + score;
+            string text = "HEALTH = " + playerHealth;
+            text += "\nSCORE = " + score;
+            text += "\nTIME UNTIL WAVE = " + EnemySpawn.spawnTimer;
+            text += "\nWAVE = " + EnemySpawn.waveCounter;
+
+
             // define debug text area
             GUILayout.BeginArea(new Rect(10f, 450f, 1600f, 1600f));
             GUILayout.Label($"<size=16>{text}</size>");

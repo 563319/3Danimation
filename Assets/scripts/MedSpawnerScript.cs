@@ -1,3 +1,4 @@
+using Unity.Hierarchy;
 using UnityEngine;
 
 public class MedSpawnerScript : MonoBehaviour
@@ -6,6 +7,9 @@ public class MedSpawnerScript : MonoBehaviour
     float spawnTimer = 10;
     bool canSpawn = true;
     Vector3  offset = new Vector3(0,1,0);
+    public Player plr;
+
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,7 +19,10 @@ public class MedSpawnerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spawnTimer -= Time.deltaTime;
+
+        
+       
+            spawnTimer -= Time.deltaTime;
         if (spawnTimer <= 0 && canSpawn == true)
         {
             // Instantiate the bullet at the position and rotation of the player
