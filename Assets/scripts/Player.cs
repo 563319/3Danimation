@@ -25,8 +25,9 @@ public class Player : MonoBehaviour
     public int playerHealth;
     public enemy Enemy;
     public bool isDead = false;
-    public int playerDamage = 50;
+    public int playerDamage = 100;
     public int score = 0;
+    public int playerMaxHealth = 200;
     
     public float rayCastOffset = 1f;
     Vector3 raycastForwardDir = new Vector3(0, 0, 0);
@@ -37,7 +38,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        playerHealth = 100;
+        playerHealth = 200;
     }
     void Update()
     {

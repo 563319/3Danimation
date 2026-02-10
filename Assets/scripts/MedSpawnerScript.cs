@@ -22,6 +22,7 @@ public class MedSpawnerScript : MonoBehaviour
             GameObject clone;
             print("spawner:" + gameObject.name);
             clone = Instantiate(healthPickup, transform.position + offset, transform.rotation);
+            print("spawned medkit");
             canSpawn = false;
             if (clone == null)
             {

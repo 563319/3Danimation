@@ -15,11 +15,17 @@ public class healthPickup : MonoBehaviour
     {
         transform.Rotate(rotSpeed * Time.deltaTime);
     }
-    void OnCollisionEnter(Collision col)
+    private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.CompareTag("player"))
+        if (col.gameObject.CompareTag("Player"))
         {
-            plr.playerHealth += 50;
+            if (plr.playerHealth < plr.playerMaxHealth)
+            {
+                plr.playerHealth += 50;
+                Destroy(gameObject);
+            }
+            
         }
+        
     }
 }
