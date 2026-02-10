@@ -42,4 +42,5 @@ public class MedSpawnerScript : MonoBehaviour
             spawnTimer = 10;
         }
     }
+    
 }
