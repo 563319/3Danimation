@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4877373081291464502}
   - component: {fileID: 1878462356156670831}
-  - component: {fileID: 5367628179295016117}
   - component: {fileID: 8528514540157331830}
   - component: {fileID: 7792665321158790879}
+  - component: {fileID: 1691172561329614698}
   m_Layer: 6
   m_Name: enemy
   m_TagString: enemy
@@ -58,21 +58,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5367628179295016117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7400805402858598181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad6b05ee66d43804d9ccb9bb73930282, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::enemy
-  anim: {fileID: 1878462356156670831}
-  enemyHealth: 100
-  enemyDamage: 20
 --- !u!195 &8528514540157331830
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -118,6 +103,21 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1691172561329614698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7400805402858598181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad6b05ee66d43804d9ccb9bb73930282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::enemy
+  anim: {fileID: 1878462356156670831}
+  enemyHealth: 100
+  enemyDamage: 20
 --- !u!1001 &3105687737144968332
 PrefabInstance:
   m_ObjectHideFlags: 0

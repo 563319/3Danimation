@@ -25,7 +25,7 @@ public class enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        enemyHealth = 100;
         agent = GetComponent<NavMeshAgent>();
         plr = GameObject.Find("player").GetComponent<Player>();
         player = GameObject.Find("player").GetComponent<Transform>();
@@ -85,10 +85,12 @@ public class enemy : MonoBehaviour
                 isIdle = false;
                 isFollowing = false;
             }
+            /*
             print("enemy touching player" + playerInRadius);
             print("following" + isFollowing);
             print("attacking" + isAttacking);
             print("idle" + isIdle);
+            */
 
             if (enemyHealth <= 0)
             {

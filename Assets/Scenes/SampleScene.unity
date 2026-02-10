@@ -2477,7 +2477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineDeoccluder
   CollideAgainst:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   IgnoreTag: 
   TransparentLayers:
     serializedVersion: 2
@@ -3988,16 +3988,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   controller: {fileID: 2132081635}
   anim: {fileID: 2132081636}
-  target: {fileID: 0}
+  targetTransform: {fileID: 0}
   turnSmoothTime: 0.1
   cam: {fileID: 330585546}
   speed: 5
   jumpSpeed: 10
   gravity: -9
   playerHealth: 100
-  Enemy: {fileID: 5367628179295016117, guid: 2f6b3bd849ffbf64f85b371863b1b8e3, type: 3}
+  Enemy: {fileID: 1691172561329614698, guid: 2f6b3bd849ffbf64f85b371863b1b8e3, type: 3}
   isDead: 0
-  playerDamage: 50
+  playerDamage: 100
   score: 0
   playerMaxHealth: 200
   rayCastOffset: 0.8

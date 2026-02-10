@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
+using static UnityEditor.VersionControl.Asset;
 
 
 
@@ -9,7 +10,7 @@ public class Player : MonoBehaviour
 {
     public CharacterController controller;
     public Animator anim;
-    public Transform target;
+    public Transform targetTransform;
 
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
@@ -23,7 +24,10 @@ public class Player : MonoBehaviour
     bool isGrounded = false;
     bool enemyInRadius = false;
     public int playerHealth;
+
     public enemy Enemy;
+    GameObject targetEnemy;
+
     public bool isDead = false;
     public int playerDamage = 100;
     public int score = 0;
@@ -38,6 +42,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        
         playerHealth = 200;
     }
     void Update()
@@ -126,9 +131,9 @@ public class Player : MonoBehaviour
             }
             if (anim.GetBool("isPunching") == true)
             {
-                if (target != null)
+                if (targetTransform != null)
                 {
-                    gameObject.transform.LookAt(target);
+                    gameObject.transform.LookAt(targetTransform);
                 }
                 else
                 {
@@ -245,7 +250,8 @@ public class Player : MonoBehaviour
         if (col.gameObject.CompareTag("enemy"))
         {
             enemyInRadius = true;
-            target = col.gameObject.transform;
+            targetTransform = col.gameObject.transform;
+            targetEnemy = col.gameObject;
         }
         else
         {
@@ -265,12 +271,39 @@ public class Player : MonoBehaviour
     }
     void DoDamagePlayer()
     {
+        print("trying to do damge");
         if (enemyInRadius == true)
         {
-            Enemy.enemyHealth -= playerDamage;
+            targetEnemy.GetComponent<enemy>().enemyHealth -= playerDamage;
+            //Enemy.enemyHealth -= playerDamage;
+            print(Enemy.enemyHealth);
         }
     }
 
+    private void OnGUI()
+    {
+        
+        if (isDead)
+        {
+            //debug text
+            string deathText = "YOU DIED!";
+
+            // define debug text area
+            GUILayout.BeginArea(new Rect(250f, 250f, 5000f, 5000f));
+            GUILayout.Label($"<size=100>{deathText}</size>");
+            GUILayout.EndArea();
+        }
+        else
+        {
+            //debug text
+            string text = "HEALTH =" + playerHealth;
+            text += "\nSCORE =" + score;
+            // define debug text area
+            GUILayout.BeginArea(new Rect(10f, 450f, 1600f, 1600f));
+            GUILayout.Label($"<size=16>{text}</size>");
+            GUILayout.EndArea();
+        }
+    }
 
 
 
