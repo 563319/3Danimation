@@ -149,6 +149,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            playerVelocity = new Vector3(0,0,0);
             anim.SetBool("isDead", true);
             anim.SetBool("isJumping", false);
             anim.SetBool("isRunning", false);

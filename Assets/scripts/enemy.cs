@@ -16,7 +16,7 @@ public class enemy : MonoBehaviour
 
     public int enemyHealth = 100;
     bool isDead = false;
-    float deathTimer = 5;
+    float deathTimer = 3;
     public int enemyDamage = 20;
 
     Player plr;
