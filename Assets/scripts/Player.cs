@@ -144,6 +144,10 @@ public class Player : MonoBehaviour
                 }
                 return;
             }
+            if (playerHealth > 200)
+            {
+                playerHealth = 200;
+            }
 
 
         }
@@ -278,9 +282,17 @@ public class Player : MonoBehaviour
         print("trying to do damge");
         if (enemyInRadius == true)
         {
-            targetEnemy.GetComponent<enemy>().enemyHealth -= playerDamage;
-            //Enemy.enemyHealth -= playerDamage;
-            print(Enemy.enemyHealth);
+            if (targetEnemy != null )
+            {
+                targetEnemy.GetComponent<enemy>().enemyHealth -= playerDamage;
+                //Enemy.enemyHealth -= playerDamage;
+                print(Enemy.enemyHealth);
+            }
+            else
+            {
+                print("no traget");
+            }
+            
         }
     }
 
