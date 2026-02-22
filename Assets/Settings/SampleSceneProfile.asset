@@ -21,7 +21,7 @@ MonoBehaviour:
     m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.25
+    m_Value: 0.28
   scatter:
     m_OverrideState: 1
     m_Value: 0.5
@@ -62,7 +62,7 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.8
   contrast:
     m_OverrideState: 1
     m_Value: 34
@@ -96,7 +96,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.291
+    m_Value: 0.361
   smoothness:
     m_OverrideState: 1
     m_Value: 0.338
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
   m_Name: LiftGammaGain
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.LiftGammaGain
-  active: 0
+  active: 1
   lift:
     m_OverrideState: 1
     m_Value: {x: 0.8640518, y: 0.9070813, z: 1, w: 0}
@@ -241,7 +241,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 13
   gaussianEnd:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 30
   gaussianMaxRadius:
     m_OverrideState: 0
@@ -310,7 +310,7 @@ MonoBehaviour:
     m_Value: 5
   intensity:
     m_OverrideState: 1
-    m_Value: 0.285
+    m_Value: 0.303
   response:
     m_OverrideState: 0
     m_Value: 0.8

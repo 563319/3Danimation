@@ -4,7 +4,7 @@ using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCou
 public class enemySpawn : MonoBehaviour
 {
     public GameObject enemy;
-    public float spawnTimer = 25;
+    public float spawnTimer = 15;
     
     public float waveCounter = 1;
     bool canSpawn = true;

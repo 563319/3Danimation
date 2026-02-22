@@ -257,9 +257,13 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.CompareTag("enemy"))
         {
-            enemyInRadius = true;
-            targetTransform = col.gameObject.transform;
-            targetEnemy = col.gameObject;
+            if (col.gameObject.GetComponent<enemy>().enemyHealth > 0)
+            {
+                enemyInRadius = true;
+                targetTransform = col.gameObject.transform;
+                targetEnemy = col.gameObject;
+            }
+            
         }
         else
         {
@@ -267,11 +271,34 @@ public class Player : MonoBehaviour
         }
 
     }
+    private void OnTriggerStay(Collider col)
+    {
+        if (col.gameObject.CompareTag("enemy"))
+        {
+            if (targetEnemy != null)
+            {
+                if (targetEnemy.GetComponent<enemy>().enemyHealth <= 0)
+                {
+                    targetTransform = null;
+                    targetEnemy = null;
+                    enemyInRadius = false;
+                }
+            }
+            if ((targetEnemy == null || targetEnemy.GetComponent<enemy>().enemyHealth <= 0) && col.GetComponent<enemy>().enemyHealth > 0)
+            {
+                targetEnemy = col.gameObject;
+                targetTransform = col.gameObject.transform;
+                enemyInRadius = true;
+            }
+        }
+    }
     private void OnTriggerExit(Collider col)
     {
         if (col.gameObject.CompareTag("enemy"))
         {
-            
+
+            targetTransform = null;
+            targetEnemy = null;
             enemyInRadius = false;
         }
         
