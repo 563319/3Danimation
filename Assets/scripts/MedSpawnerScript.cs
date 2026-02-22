@@ -30,7 +30,10 @@ public class MedSpawnerScript : MonoBehaviour
         if (spawnTimer <= 0 && canSpawn == true)
         {
             // Instantiate the bullet at the position and rotation of the player
-            
+            if (clone != null)
+            {
+                Destroy(clone);
+            }
             print("spawner:" + gameObject.name);
             clone = Instantiate(healthPickup, transform.position + offset, transform.rotation);
             print("spawned medkit");
