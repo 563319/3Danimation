@@ -1,5 +1,4 @@
-using Unity.Hierarchy;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class MedSpawnerScript : MonoBehaviour

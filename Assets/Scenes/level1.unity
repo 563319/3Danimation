@@ -3697,7 +3697,7 @@ Transform:
   m_GameObject: {fileID: 290630172}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.376, z: 0}
+  m_LocalPosition: {x: 0, y: 1.196, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4185,8 +4185,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.122183256, y: -0.0000000013380855, z: 1.6472587e-10, w: 0.9925076}
-  m_LocalPosition: {x: -6.51, y: 1.3759999, z: -28.669998}
+  m_LocalRotation: {x: 0.12218328, y: 0.0000000073947586, z: -9.103366e-10, w: 0.9925076}
+  m_LocalPosition: {x: -6.51, y: 5.676, z: -33.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11883,8 +11883,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171814588}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12218325, y: -0.0000000013380856, z: 1.6472593e-10, w: 0.9925076}
-  m_LocalPosition: {x: 0, y: 1.376, z: -4}
+  m_LocalRotation: {x: 0.12218327, y: 0.0000000073947586, z: -9.103364e-10, w: 0.9925076}
+  m_LocalPosition: {x: 0, y: 2.196, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12114,8 +12114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineDeoccluder
   CollideAgainst:
     serializedVersion: 2
-    m_Bits: 0
-  IgnoreTag: 
+    m_Bits: 1
+  IgnoreTag: enemy
   TransparentLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -20355,7 +20355,7 @@ Transform:
   m_GameObject: {fileID: 2132081633}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.51, y: 0, z: -24.669998}
+  m_LocalPosition: {x: -6.51, y: 3.48, z: -29.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
