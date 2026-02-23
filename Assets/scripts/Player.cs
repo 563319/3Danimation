@@ -50,6 +50,10 @@ public class Player : MonoBehaviour
         PlayerUpdate();
         DoGravity();
         RaycastIsGrounded();
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Application.Quit();
+        }
         //RaycastForward();
         //controller.velocity.y += gravity;
     }
@@ -85,10 +89,7 @@ public class Player : MonoBehaviour
                 anim.SetBool("isRunning", false);
                 anim.SetBool("isIdle", false);
             }
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                Application.Quit();
-            }
+            
             if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown("f") && anim.GetBool("isJumping") == false)
             {
                 punch();
